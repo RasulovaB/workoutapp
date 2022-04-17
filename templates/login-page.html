@@ -1,0 +1,42 @@
+<!-- Inherit from default layout page -->
+{% extends "layout.html" %}
+
+<!-- Override title -->
+
+{% if title %}
+<title>HIITWA - {{ title }}</title>
+{% else %}
+<title>HIIT Workout App</title>
+{% endif %}
+
+<!-- Override content -->
+{% block content%}
+<!-- Content -->
+
+<div class="row no-gutters login-layout">
+    <div class="col login-bgr"><img src="static/log-img.png" class="img-fluid" alt="Responsive image"></div>
+    <div class="col login-intro">
+        <div class="content-section ">
+            <h1>Sign In</h1>
+            <!-- Form to login -->
+            <form action="" method="post">
+                <div class="form-group">
+
+                    <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Email Address">
+
+                </div>
+                <div class="form-group pwd-form">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-check">
+                    <a href="{{ url_for('home') }}" class="btn btn-grdnt-login  login-btn" role="button">CONTINUE</a>
+                </div>
+                <div class="form-check">
+                    <a href="{{ url_for('register') }}" class="btn btn-grdnt-login  login-btn" role="button">SIGN UP</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
