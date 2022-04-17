@@ -1,0 +1,104 @@
+body {
+    background-image: url("log-img.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-nav-home {
+    background-image: linear-gradient(to right, black, red);
+}
+
+h3 {
+    color: #ffffffff;
+}
+
+.log-btn {
+    border-radius: 25px;
+    width: 120px;
+    font-weight: bold;
+}
+
+.btn-grdnt {
+    background-image: linear-gradient(to right, black, red);
+    color: #ffffff;
+    /* border-radius: 25px; */
+}
+
+
+
+.home-intro {
+    text-align: left;
+    position: fixed;
+    top: 40%;
+}
+
+.home-intro h3 {
+    margin-bottom: 20px;
+    font-size: 3rem;
+}
+
+footer {
+    background-color: red;
+    text-align: center;
+    padding: 1px;
+}
+
+/*Login Page*/
+.login-bgr img {
+    height: 100%;
+}
+
+.content-section {
+    margin: 5rem;
+}
+
+.login-layout {
+    height: 50rem;
+}
+
+.login-intro {
+    background-color: #ffffff;
+
+}
+
+.login-intro h1 {
+    color: black;
+    padding-bottom: 4rem;
+}
+
+.btn-grdnt-login {
+    background-image: linear-gradient(to right, black, red);
+    color: #ffffff;
+    width: 20rem;
+    border-radius: 25px;
+
+}
+
+.form-group {
+    width: 70%;
+}
+
+.form-check {
+    padding-bottom: 1rem;
+    padding-left: 0;
+}
+
+.pwd-form {
+    margin-bottom: 5rem;
+}
+
+/*Register Page*/
+
+.reg-section h1 {
+    margin-bottom: 2.75rem;
+}
+
+.reg-card {
+    margin-top: 4rem;
+    padding: 4rem;
+}
+
+.form-group-reg {
+    width: 100%;
+    padding: 10px;
+}
