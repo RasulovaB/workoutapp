@@ -22,4 +22,4 @@
   
  4. Click on `http://127.0.0.1:5000/` 
  
- ## The application does not accespt any user input. However, a user can use the buttons to navigate to other pages. 
+ ## The application demo does not accept any user text input yet. However, a user can use the 'Build Your Own Workout', 'Sign In', 'Sign Up', and 'Continue' buttons to navigate to view different pages. 
