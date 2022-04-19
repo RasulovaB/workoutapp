@@ -21,3 +21,5 @@
   `Restarting with stat`
   
  4. Click on `http://127.0.0.1:5000/` 
+ 
+ ## The application does not accespt any user input. However, a user can use the buttons to navigate to other pages. 
