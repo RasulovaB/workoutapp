@@ -3,7 +3,7 @@
 ## To Run The App
 
 1. Make sure you have python3 installed in your machine
-2. Clone this repository (from *ui-auth* branch)
+2. Clone this repository 
 3. Run command `python3 hww-app.py`
 
 ### If you did everything correct you should get the link:
