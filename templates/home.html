@@ -14,28 +14,21 @@ Home Page
 <!-- Override content -->
 {% block content%}
 <!-- Header -->
-<header class="site-header">
-    <nav class="navbar navbar-expand-md navbar-dark bg-nav-home fixed-top">
-        <div class="container">
-            <a class="navbar-brand mr-4" href="/">HITTWA</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
-                aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<head><nav class="navbar navbar-dark bg-nav-home">
+    <div class="container d-flex justify-content-between">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/static/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      HIITWA
+    </a>
 
-        </div>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarToggle">
-            <div class="navbar-nav ">
-                <ul class="nav ">
-                    <li class="nav-item">
-                        <a class="btn btn-light log-btn" href="{{ url_for('login') }}" role="button">Sign In</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-<main role="main" class="container">
+        <a class="btn btn-light log-btn" href="{{url_for('login')}}">Login</a>
+
+    </div>
+  </nav>
+</head>
+
+<body class="home-bg">
+<main role="main" class="container ">
     <div class="container-fluid main-bgr">
         <div class="content-section home-intro">
             <h3>HIIT Workout Application</h3>
@@ -43,5 +36,6 @@ Home Page
         </div>
     </div>
 </main>
+</body>
 
 {% endblock %}
