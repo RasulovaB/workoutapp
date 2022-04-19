@@ -26,6 +26,11 @@ def login():
 @app.route("/register")
 def register():
     return render_template("signup-page.html", title="Register")
+    
+
+@app.route("/workoutbuilder")
+def workoutbuilder():
+    return render_template("workout-builder.html", title="HIIT Workout Builder")
 
 
 # run file with python3 cmd
