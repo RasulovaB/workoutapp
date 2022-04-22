@@ -18,7 +18,7 @@
     <div class="col login-intro">
         <div class="content-section ">
             <h1>Sign In</h1>
-            <!-- Form to login -->
+            
             <!--Display success or error messages-->
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -30,7 +30,7 @@
             {% endif %}
             {% endwith %}
 
-            <!-- Form to register -->
+            <!-- Form to login -->
             <form class="card-text" action="" method="POST" novalidate>
                 <!-- protects from CSRF attacks-->
                 {{ form.hidden_tag() }}
