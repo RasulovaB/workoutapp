@@ -19,23 +19,65 @@
         <div class="content-section ">
             <h1>Sign In</h1>
             <!-- Form to login -->
-            <form action="" method="post">
+            <!--Display success or error messages-->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class=" form-group alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <!-- Form to register -->
+            <form class="card-text" action="" method="POST" novalidate>
+                <!-- protects from CSRF attacks-->
+                {{ form.hidden_tag() }}
+
+                <div class="form-group-reg">
+
+                    {% if form.email.errors %}
+                    {{ form.email(placeholder='Email Address', class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(placeholder='Email Address', class="form-control form-control-lg") }}
+                    {% endif %}
+
+                </div>
+                <div class="form-group-reg">
+
+                    {% if form.password.errors %}
+                    {{ form.password(placeholder='Password', class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(placeholder='Password', class="form-control form-control-lg pwd-form") }}
+                    {% endif %}
+                </div>
+                <!-- <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-input") }}
+                </div> -->
+
                 <div class="form-group">
+                    {{ form.submit(class="btn btn-grdnt-login  login-btn", value="CONTINUE") }}
+                    <!-- Denys, this html code was before, I changed it form.submit-->
+                    <!-- <a href="{{ url_for('login') }}" class="btn btn-grdnt-login  login-btn" role="button">CONTINUE</a> -->
 
-                    <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Email Address">
-
-                </div>
-                <div class="form-group pwd-form">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-check">
-                    <a href="{{ url_for('home') }}" class="btn btn-grdnt-login  login-btn" role="button">CONTINUE</a>
                 </div>
                 <div class="form-check">
                     <a href="{{ url_for('register') }}" class="btn btn-grdnt-login  login-btn" role="button">SIGN UP</a>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
