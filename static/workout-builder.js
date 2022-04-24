@@ -44,6 +44,7 @@ function addMuscleToCart(title){
     var addedMuscles = document.getElementsByClassName('selected-muscles')[0]
     buttonContents = `<button class="btn image-toggle btn-block add-button remove-button"><i class="fa fa-minus button-icon"></i>${title}</button>`
     button.innerHTML = buttonContents
+    button.innerText = title
     addedMuscles.append(button)
     document.getElementById('total-muscles').innerText = document.getElementsByClassName('selected-muscles').length
 }

@@ -1,0 +1,70 @@
+<!-- Inherit from default layout page -->
+{% extends "layout.html" %}
+
+<!-- Override title -->
+<!-- {% block title%}
+Home Page
+{% endblock %} -->
+{% if title %}
+<title>HIITWA - {{ title }}</title>
+{% else %}
+<title>HIIT Workout App</title>
+{% endif %}
+
+<!-- Override content -->
+{% block content%}
+<!-- Header -->
+<head>
+    <script language=javascript type=text/javascript src="static/workout-summary.js" defer></script>
+    <nav class="navbar navbar-dark bg-nav-home">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img class="d-inline-block align-top" src="static/logo.png" width="30" height="30" alt="">
+                HIITWA
+            </a>
+            <a class="btn btn-light log-btn" href="{{url_for('login')}}">Logout</a>
+        </div>
+    </nav>
+</head>
+
+<body class="grdnt_bg" onload='getWorkout({{json|tojson}});'>
+    <div class="container half_bottom_padding"></div>
+    <div class="container align-items-stretch">
+        <div class="row">
+            <div class="col-md-6" style="min-height: 700px;">
+                    <div class="container justify-content-center image-container">
+                        <div class="container half_bottom_padding"></div>
+                        <h2>Your HIIT Workout</h2>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h5 id="exercise-time"></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 id ="rest-time" style="text-align: center;"></h5>
+                            </div>
+                            <div class="col-md-4">
+                                <h5 id ="num-sets" style="text-align: right;"></h5>
+                            </div>
+                        </div>
+                        <div class="container half_bottom_padding"></div>
+                        <div class="btn-group-vertical col-12" data-toggle="buttons" id="exercise-buttons"></div>
+                    </div>
+                    <div class="container align-bottom">
+                        <a href="{{ url_for('home') }}" class="btn btn-grdnt-login" role="button">COMPLETE WORKOUT</a>
+                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="container video-descr-cont"> 
+                    <div class="center" id="video-description">
+                        <em><h3 style="font-size:1.5rem;">Select an exercise to view its description and a video demonstration</h3></em>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+{% endblock %}

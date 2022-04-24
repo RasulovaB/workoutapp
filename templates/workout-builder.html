@@ -42,34 +42,34 @@ Home Page
                     <div class="container justify-content-center">
                         <div class="row">
                           <div class="col-sm">
-                                <label class="btn toggle-btn">  
+                                <label class="btn toggle-btn image-toggler toggle-btn-width">  
                                     <input type="radio" name="options" id="option1" data-image-id="#chest" autocomplete="off" onchange="check_value('chest')"> Chest
                                 </label>
                           </div>
                           <div class="col-sm">
-                                <label class="btn toggle-btn image-toggler">
+                                <label class="btn toggle-btn image-toggler toggle-btn-width">
                                     <input type="radio" name="options" id="option2" data-image-id="#back" autocomplete="off" onchange="check_value('back')"> Back
                                 </label>
                           </div>
                           <div class="col-sm">
-                                <label class="btn toggle-btn image-toggler">
+                                <label class="btn toggle-btn image-toggler toggle-btn-width">
                                     <input type="radio" name="options" id="option3" autocomplete="off" onchange="check_value('arms')"> Arms
                                 </label>
                           </div>
                         </div>
                         <div class="row">
                             <div class="col-sm">
-                                <label class="btn toggle-btn image-toggler">
+                                <label class="btn toggle-btn image-toggler toggle-btn-width">
                                     <input type="radio" name="options" id="option4" autocomplete="off" onchange="check_value('abs')"> Abs
                                 </label>
                             </div>
                             <div class="col-sm">
-                                <label class="btn toggle-btn image-toggler">
+                                <label class="btn toggle-btn image-toggler toggle-btn-width">
                                     <input type="radio" name="options" id="option5" autocomplete="off" onchange="check_value('legs')"> Legs
                                 </label>
                             </div>
                             <div class="col-sm">
-                                <label class="btn toggle-btn image-toggler">
+                                <label class="btn toggle-btn image-toggler toggle-btn-width">
                                     <input type="radio" name="options" id="option6" autocomplete="off" onchange="check_value('shoulders')"> Shoulders
                                 </label>
                             </div>
@@ -106,13 +106,13 @@ Home Page
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
 
 
-                            <label class="btn toggle-btn">
+                            <label class="btn toggle-btn toggle-btn-width">
                             <input type="radio" name="skill" id="option1" autocomplete="off"> Beginner
                             </label>
-                            <label class="btn toggle-btn">
+                            <label class="btn toggle-btn toggle-btn-width">
                             <input type="radio" name="skill" id="option2" autocomplete="off"> Intermediate
                             </label>
-                            <label class="btn toggle-btn">
+                            <label class="btn toggle-btn toggle-btn-width">
                             <input type="radio" name="skill" id="option3" autocomplete="off"> Advanced
                             </label>
                         </div>
@@ -122,7 +122,8 @@ Home Page
                 <div class="container d-flex align-items-end">
                     Total Exercises Added:<div id="total-muscles">0</div>
                 </div>
-                
+                <div class="container align-bottom">
+                    <a href="{{ url_for('workoutsummary') }}" class="btn btn-grdnt-login" role="button">START WORKOUT</a></div>
                </div>
             </div>
           </div>
