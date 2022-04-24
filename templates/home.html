@@ -17,11 +17,11 @@ Home Page
 <head><nav class="navbar navbar-dark bg-nav-home">
     <div class="container d-flex justify-content-between">
     <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="/static/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      <img src="/static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
       HIITWA
     </a>
 
-        <a class="btn btn-light log-btn" href="{{url_for('login')}}">Login</a>
+        <a class="btn btn-light log-btn" href="{{url_for('auth.login')}}">Login</a>
 
     </div>
   </nav>
@@ -32,7 +32,7 @@ Home Page
     <div class="container-fluid main-bgr">
         <div class="content-section home-intro">
             <h3>HIIT Workout Application</h3>
-            <a href="{{ url_for('login') }}" class="btn btn-grdnt" role="button">Build Your Own Workout</a>
+            <a href="{{ url_for('workout.workout_builder') }}" class="btn btn-grdnt" role="button">Build Your Own Workout</a>
         </div>
     </div>
 </main>

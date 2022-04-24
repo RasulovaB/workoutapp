@@ -4,7 +4,12 @@
 
 1. Make sure you have python3 installed in your machine
 2. Clone this repository 
-3. Run command `python3 hww-app.py`
+3. Run command `FLASK_ENV=development FLASK_APP=hww-app.py python3 -m flask run`
+4. Initialize DB. While `flask run` is running, run command `FLASK_APP=hww-app.py python3 -m flask init-db`
+
+## Dev mode
+To have flask refresh on changes, run flask in dev mode. To do that, set env variable:
+`export FLASK_ENV=development`
 
 ### If you did everything correct you should get the link:
 
