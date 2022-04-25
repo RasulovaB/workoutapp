@@ -14,7 +14,7 @@
 <!-- Content -->
 
 <div class="row no-gutters login-layout">
-    <div class="col login-bgr"><img src="static/log-img.png" class="img-fluid" alt="Responsive image"></div>
+    <div class="col login-bgr"><img src="static/images/log-img.png" class="img-fluid" alt="Responsive image"></div>
     <div class="col login-intro">
         <div class="content-section ">
             <h1>Sign In</h1>
@@ -30,10 +30,10 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="form-check">
-                    <a href="{{ url_for('workoutbuilder') }}" class="btn btn-grdnt-login  login-btn" role="button">CONTINUE</a>
+                    <a href="{{ url_for('workout.workout_builder') }}" class="btn btn-grdnt-login  login-btn" role="button">CONTINUE</a>
                 </div>
                 <div class="form-check">
-                    <a href="{{ url_for('register') }}" class="btn btn-grdnt-login  login-btn" role="button">SIGN UP</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-grdnt-login  login-btn" role="button">SIGN UP</a>
                 </div>
             </form>
         </div>

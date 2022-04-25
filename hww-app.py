@@ -6,33 +6,33 @@
  * CREATEDATE: [04/16/2022]
 
 """
-from flask import Flask, render_template
-from matplotlib.pyplot import title
+from flask import Flask
 
-app = Flask(__name__)
-
-
-@app.route("/")
-@app.route("/home")
-def home():
-    return render_template("home.html")
+from db import db
+from controller import main_blueprint, auth_blueprint, workout_blueprint
 
 
-@app.route("/login")
-def login():
-    return render_template("login-page.html", title="Login")
+def create_app():
+    """
+    Function that creates flask app and initializes it
+    """
+    # Create app
+    app = Flask(__name__)
 
+    # Register blueprints
+    app.register_blueprint(main_blueprint.app)
+    app.register_blueprint(auth_blueprint.app)
+    app.register_blueprint(workout_blueprint.app)
 
-@app.route("/register")
-def register():
-    return render_template("signup-page.html", title="Register")
-    
+    # Init DB
+    db.init_app(app)
 
-@app.route("/workoutbuilder")
-def workoutbuilder():
-    return render_template("workout-builder.html", title="HIIT Workout Builder")
+    # Attach config file with secret
+    app.config.from_pyfile('config/app.cfg', silent=True)
+
+    return app
 
 
 # run file with python3 cmd
 if __name__ == "__main__":
-    app.run(debug=True)
+    create_app()

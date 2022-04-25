@@ -9,7 +9,7 @@ body {
 }
 
 .home-bg {
-    background-image: url("log-img.png") !important;
+    background-image: url("../images/log-img.png") !important;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -163,6 +163,10 @@ input {
     width: 100%;
     background-color: white;  
     border-radius: 25px !important;  
+}
+
+.container {
+    margin-bottom: 1em;
 }
 
 .image-toggle {
