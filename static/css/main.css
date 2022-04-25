@@ -32,10 +32,18 @@ h4{
     font-size: 1rem;
 }
 
+h5{
+    font-size: .85rem;
+}
+
 .log-btn {
     border-radius: 25px;
     width: 120px;
     font-weight: bold;
+}
+
+.container_height {
+    min-height: 700px;
 }
 
 .btn-grdnt {
@@ -94,10 +102,17 @@ footer {
 
 .btn-grdnt-login {
     background-image: linear-gradient(to right, black, red);
+    background-repeat: no-repeat !important;
+    background-color: transparent;
     color: #ffffff;
     width: 20rem;
     border-radius: 25px;
+}
 
+.btn-grdnt-login:hover {
+    color: white;
+    font-weight: bold;
+    background-image: linear-gradient(to right, red, white);
 }
 
 .form-group {
@@ -145,17 +160,26 @@ footer {
 
 .toggle-btn {
     border-radius: 25px !important;
-    width: 120px !important;
     font-weight: bold !important;
     background-color: rgb(240, 240, 240) !important;
 }
 
-.toggle-btn.active {
+.toggle-btn.active, .toggle-btn:active {
     background-color: grey !important;
+}
+
+.toggle-btn-width {
+    width: 120px !important;
 }
 
 input {
     display: none;
+}
+
+.video-descr-cont {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
 }
 
 .image-container {
@@ -190,15 +214,39 @@ input {
     vertical-align: middle;
 }
 
-table.workout-builder-buttons {
-    
-  width: 100%;
-  background-color: transparent;
-  border-collapse: collapse;
-  border-width: 2px;
-  border-color: transparent;
-  border-style: solid;
-  color: #000000;
-  text-align:center;
+.row-flex {
+    display: flex;
+    align-items: center;
+}
+  
+.center {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: center;
+}
+  
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+  
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 15px;
+}
+  
+.align-bottom {
+    text-align:center;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
