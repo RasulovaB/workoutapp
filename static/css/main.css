@@ -78,16 +78,20 @@ footer {
 }
 
 /*Login Page*/
+.leftside,
+.rightside {
+    width: 100%;
+}
 .login-bgr img {
     height: 100%;
 }
 
 .content-section {
-    margin: 5rem;
+    margin: 0;
 }
 
 .login-layout {
-    height: 50rem;
+    height: 100vh;
 }
 
 .login-intro {
@@ -97,7 +101,15 @@ footer {
 
 .login-intro h1 {
     color: black;
-    padding-bottom: 4rem;
+    padding: 4rem;
+}
+
+.loginform {
+    padding: 4rem;
+}
+
+.logingrp {
+    width: 75%;
 }
 
 .btn-grdnt-login {
