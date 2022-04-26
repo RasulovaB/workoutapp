@@ -262,3 +262,7 @@ input {
     transform: translateX(-50%);
 }
 
+.center-nav-bar {
+    margin: auto;
+}
+
