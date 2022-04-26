@@ -18,22 +18,62 @@
     <div class="col login-intro">
         <div class="content-section ">
             <h1>Sign In</h1>
+
+            <!--Display success or error messages-->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class=" form-group alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
             <!-- Form to login -->
-            <form action="" method="post">
+            <form class="card-text" action="" method="POST" novalidate>
+                <!-- protects from CSRF attacks-->
+                {{ form.hidden_tag() }}
+
+                <div class="form-group-reg">
+
+                    {% if form.email.errors %}
+                    {{ form.email(placeholder='Email Address', class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.email(placeholder='Email Address', class="form-control form-control-lg") }}
+                    {% endif %}
+
+                </div>
+                <div class="form-group-reg">
+
+                    {% if form.password.errors %}
+                    {{ form.password(placeholder='Password', class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(placeholder='Password', class="form-control form-control-lg pwd-form") }}
+                    {% endif %}
+                </div>
+                <!-- <div class="form-check">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-input") }}
+                </div> -->
+
                 <div class="form-group">
-
-                    <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Email Address">
+                    {{ form.submit(class="btn btn-grdnt-login  login-btn", value="CONTINUE") }}
 
                 </div>
-                <div class="form-group pwd-form">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
                 <div class="form-check">
-                    <a href="{{ url_for('workout.workout_builder') }}" class="btn btn-grdnt-login  login-btn" role="button">CONTINUE</a>
-                </div>
-                <div class="form-check">
-                    <a href="{{ url_for('auth.register') }}" class="btn btn-grdnt-login  login-btn" role="button">SIGN UP</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-grdnt-login  login-btn" role="button">SIGN
+                        UP</a>
                 </div>
             </form>
         </div>
