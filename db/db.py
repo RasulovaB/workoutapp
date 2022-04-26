@@ -66,3 +66,52 @@ def init_db_command():
     """
     init_db()
     click.echo('Initialized database.')
+
+
+def new_user(username, password):
+    """
+    Create new user
+    """
+    con = sqlite3.connect(g.db)
+    cur = con.cursor()
+    cur.execute("INSERT INTO "
+                "user(username, email, password, password)"
+                "VALUES(username, email, password, password)")
+    con.commit()
+    con.close()
+
+
+def retrieve_user():
+    """
+    Retrieve existing user
+    """
+    con = sqlite3.connect(g.db)
+    cur = con.cursor()
+    cur.execute("SELECT username, password "
+                "FROM user" 
+                "WHERE username='{username}' AND password='{password}'")
+    user = cur.fetchall()
+    con.close()
+    return user
+
+
+def login():
+    """
+    Login existing user
+    """
+    if login.method == 'POST':
+        username = login.form['username']
+        password = login.form['password']
+        users = retrieve_user()
+        return()
+
+
+def register():
+    """
+    Sign up new user
+    """
+    if register.method == 'POST':
+        username = register.form['username']
+        email = register.form['email']
+        password = register.form['password']
+        return()
