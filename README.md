@@ -27,4 +27,8 @@ To have flask refresh on changes, run flask in dev mode. To do that, set env var
   
  4. Click on `http://127.0.0.1:5000/` 
  
- ## The application demo does not accept any user text input yet. However, a user can use the 'Build Your Own Workout', 'Sign In', 'Sign Up', and 'Continue' buttons to navigate to view different pages. 
+ ### Temporary user credentials to login:
+ ```
+ email: admin@hww.com
+ password: password
+ ```
