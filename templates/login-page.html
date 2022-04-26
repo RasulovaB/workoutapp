@@ -14,9 +14,11 @@
 <!-- Content -->
 
 <div class="row no-gutters login-layout">
-    <div class="col login-bgr"><img src="static/images/log-img.png" class="img-fluid" alt="Responsive image"></div>
-    <div class="col login-intro">
-        <div class="content-section ">
+    <div class="col login-bgr no-gutters"><img src="static/images/log-img.png" class="img-fluid leftside"
+            alt="Responsive image">
+    </div>
+    <div class="col login-intro no-gutters">
+        <div class="content-section rightside">
             <h1>Sign In</h1>
 
             <!--Display success or error messages-->
@@ -31,11 +33,11 @@
             {% endwith %}
 
             <!-- Form to login -->
-            <form class="card-text" action="" method="POST" novalidate>
+            <form class="card-text loginform" action="" method="POST" novalidate>
                 <!-- protects from CSRF attacks-->
                 {{ form.hidden_tag() }}
 
-                <div class="form-group-reg">
+                <div class="form-group-reg logingrp">
 
                     {% if form.email.errors %}
                     {{ form.email(placeholder='Email Address', class="form-control form-control-lg is-invalid") }}
@@ -49,7 +51,7 @@
                     {% endif %}
 
                 </div>
-                <div class="form-group-reg">
+                <div class="form-group-reg logingrp">
 
                     {% if form.password.errors %}
                     {{ form.password(placeholder='Password', class="form-control form-control-lg is-invalid") }}
