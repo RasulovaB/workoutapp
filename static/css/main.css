@@ -96,13 +96,10 @@ footer {
 
 .login-intro {
     background-color: #ffffff;
-
-}
-
-.login-intro h1 {
     color: black;
-    padding: 4rem;
+
 }
+
 
 .loginform {
     padding: 4rem;
@@ -265,4 +262,21 @@ input {
 .center-nav-bar {
     margin: auto;
 }
+
+.align-text-center {
+    text-align:center;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .padding_top{
+    padding-top: 5%;
+  }
 
