@@ -5,6 +5,8 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
+from model.user import User
+
 
 def get_db():
     """
@@ -53,6 +55,9 @@ def init_db():
         database.executescript(file.read().decode('utf8'))
 
     # Create test users here
+    database.execute('INSERT INTO user (username, email, password) VALUES (?, ?, ?)',
+                     ('admin', 'admin@admin.com', 'admin'))
+    # database.commit(User(userName="admin", email="admin@admin.com", password="admin"))
 
     # Commit DB changes
     database.commit()

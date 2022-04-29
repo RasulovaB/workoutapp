@@ -4,13 +4,18 @@ File contains scripts that define auth related routes.
 /logout
 /register
 """
+import sqlite3
 from functools import wraps
 from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from hwwforms import SignupForm, LoginForm
 from flask_login import login_user, current_user, logout_user
 
+from model.user import User
+
 # Blueprint for auth pages.
 app = Blueprint("auth", __name__)
+
+from flask import g
 
 
 # def login_required(func):
@@ -44,10 +49,25 @@ def login():
     Function that calls the login template. Accepts GET for when we are trying to
     view the page and POST for when we are trying to submit a form
     """
+    if 'db' not in g:
+        g.db = sqlite3.connect(
+            'db.sqlite',
+            detect_types=sqlite3.PARSE_DECLTYPES
+        )
+        g.db.row_factory = sqlite3.Row
+
+    database = g.db
+
     form = LoginForm()
     if form.validate_on_submit():
         # temporary test until db is ready
-        if form.email.data == "admin@hww.com" and form.password.data == "password":
+
+        query_result = database.execute('SELECT * FROM user WHERE email = ?', (form.email.data, )).fetchone()
+        user = None
+        if query_result:
+            user = User(**query_result)
+
+        if form.password.data == user.password:
             return redirect(url_for("workout.workout_builder"))
         else:
             flash("Please check username and password", "danger")
