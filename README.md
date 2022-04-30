@@ -4,18 +4,14 @@
 
 1. Make sure you have python3 installed in your machine
 2. Clone this repository 
-3. Run command `FLASK_ENV=development FLASK_APP=hww-app.py python3 -m flask run`
-4. Initialize DB. While `flask run` is running, run command `FLASK_APP=hww-app.py python3 -m flask init-db`
+3. Run command `FLASK_ENV=development FLASK_APP=hwwapp.py python3 -m flask run`
+
 
 ## Dev mode
 To have flask refresh on changes, run flask in dev mode. To do that, set env variable:
 `export FLASK_ENV=development`
 
 ### If you did everything correct you should get the link:
-
-`(base) bakhorarasulova@Bakhoras-MacBook-Pro HIITWA % python3 hww-app.py`
-
-`Serving Flask app 'hww-app' (lazy loading)`
 
 `Environment: production`
    
@@ -27,8 +23,12 @@ To have flask refresh on changes, run flask in dev mode. To do that, set env var
   
  4. Click on `http://127.0.0.1:5000/` 
  
- ### Temporary user credentials to login:
+ ### The app authenticates and validates user, and stores hashed password
+ ### The db has stored users credentials to login (you can test and add new users as well):
  ```
- email: admin@hww.com
- password: password
+ user1: email: alex11@gmail.com
+        password: Amerika21@@@
+ 
+ user2: email: steven11@gmail.com
+        password: Amerika21@@@
  ```
