@@ -24,7 +24,7 @@ To have flask refresh on changes, run flask in dev mode. To do that, set env var
  4. Click on `http://127.0.0.1:5000/` 
  
  ### The app authenticates and validates user, and stores hashed password
- ### The db has stored users credentials to login (you can test and add new users as well):
+ ### The db has users credentials to login (you can test and add new users as well):
  ```
  user1: email: alex11@gmail.com
         password: Amerika21@@@
