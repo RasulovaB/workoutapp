@@ -170,8 +170,10 @@ function continueButtonClicked() {
                 })
             } else {
                 console.error('Error:', response);
+
+                /* Example Call to Modals */
                 //confirmModal('Do you want to continue?', "/workout_overview");
-                alertModal('Error message');
+                //alertModal('Error message');
             }
 
         })
