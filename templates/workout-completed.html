@@ -10,26 +10,17 @@ Home Page
 {% else %}
     <title>HIIT Workout App</title>
 {% endif %}
-
 <!-- Override content -->
 {% block content%}
     <!-- Header -->
     <head>
-        <script language=javascript type=text/javascript src="static/js/workout-completed.js" async>
-        </script>
-
-        <nav class="navbar navbar-dark bg-nav-home">
-            <div class="container d-flex justify-content-between center-nav-bar">
-                <a class="navbar-brand d-flex align-items-center" href="/">
-                    <img class="d-inline-block align-top" src="static/images/logo.png" width="30" height="30" alt="">
-                    HIITWA
-                </a>
-                <a class="btn btn-light log-btn" href="{{url_for('auth.logout')}}">Logout</a>
-            </div>
-        </nav>
+        <script language=javascript type=text/javascript src="static/js/workout-completed.js" async></script>
+        <script language=javascript type=text/javascript src="static/js/confetti.js" defer></script>
+        {% include 'nav_bar.html' %}
     </head>
 
     <body class="grdnt_bg">
+        <canvas class="confetti" id="canvas"></canvas>         
         <div class="container half_bottom_padding"></div>
         <div class="container align-items-stretch">
             <div class="row">
@@ -39,7 +30,7 @@ Home Page
                             <div class="container align-text-center"><h1>Congratulations!</h1>
                             </div>
                             <hr>
-                            <div class="container align-text-center" style="height:20%; padding-top:2.5%;">
+                            <div class="container align-text-center" style="height:20%; padding-top:2.5%; color: transparent;">
                                 <img src="static/images/party-emoji.png" width="15%" alt="">
                             </div>
                             <div class="container align-text-center" style="height:20%;"><div class="vertical-center"><h2>You Completed a Workout!</h2></div></div>
@@ -66,10 +57,10 @@ Home Page
                         <div class="container align-bottom">
                             <a href="{{ url_for('main.home') }}" class="btn btn-grdnt-login" role="button">COMPLETE WORKOUT</a>
                         </div>
-                </div>
-                
+                </div>   
             </div>
-        </div>*/
+        </div>
+        
     </body>
 
 

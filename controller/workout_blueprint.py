@@ -135,3 +135,5 @@ def mark_workout_completed():
 def submit_rating():
     response = jsonify(success=True)
     return response
+
+

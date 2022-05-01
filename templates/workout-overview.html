@@ -16,15 +16,7 @@ Home Page
 <!-- Header -->
 <head>
     <script language=javascript type=text/javascript src="static/js/workout-overview.js" defer></script>
-    <nav class="navbar navbar-dark bg-nav-home">
-        <div class="container d-flex justify-content-between center-nav-bar">
-            <a class="navbar-brand d-flex align-items-center" href="/">
-                <img class="d-inline-block align-top" src="static/images/logo.png" width="30" height="30" alt="">
-                HIITWA
-            </a>
-            <a class="btn btn-light log-btn" href="{{url_for('auth.login')}}">Logout</a>
-        </div>
-    </nav>
+    {% include 'nav_bar.html' %}
 </head>
 
 <body class="grdnt_bg" onload='getWorkout({{ json|tojson }});'>

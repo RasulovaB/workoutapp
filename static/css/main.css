@@ -113,7 +113,7 @@ footer {
     background-image: linear-gradient(to right, black, red);
     background-repeat: no-repeat !important;
     background-color: transparent;
-    color: #ffffff;
+    color: #ffffff !important;
     width: 20rem;
     border-radius: 25px;
 }
@@ -279,4 +279,16 @@ input {
   .padding_top{
     padding-top: 5%;
   }
+
+  .confetti{
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    touch-action: none;
+    position: fixed;
+    top: 7%;
+    left: 0;
+    user-select: none;
+ }
 

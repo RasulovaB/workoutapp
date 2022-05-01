@@ -5,6 +5,7 @@ if(document.readyState === "loading") {
 }
 
 function ready() {
+
     fetch('/get_exercises')
         .then(response => {
             if (response.ok) {
@@ -169,10 +170,31 @@ function continueButtonClicked() {
                 })
             } else {
                 console.error('Error:', response);
+                //confirmModal('Do you want to continue?', "/workout_overview");
+                alertModal('Error message');
             }
 
         })
         .catch((error) => {
             console.error('Error:', error);
+            alertModal(error);
         });
 }
+
+function alertModal(body) {
+    // Display error message to the user in a modal
+    // Body is the error message
+    $('#alert-modal-body').html(body);
+    $('#errorModal').modal('show');
+}
+
+function confirmModal(body, confirmLink) {
+    // Display error message to the user in a modal
+    // Body is the modal message and confirmLink is the page to be routed to
+    $("#confirmed-button").click(function(){
+        window.location.href= confirmLink;
+      });
+    $('#confirm-modal-body').html(body);
+    $('#confirmModal').modal('show');
+}
+
