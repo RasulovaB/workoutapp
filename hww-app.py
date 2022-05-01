@@ -8,8 +8,9 @@
 """
 from flask import Flask
 
-from db import db
 from controller import main_blueprint, auth_blueprint, workout_blueprint
+from db import db
+from model import user, cart, exercise, workout
 
 
 def create_app():
@@ -21,14 +22,18 @@ def create_app():
 
     # Register blueprints
     app.register_blueprint(main_blueprint.app)
+
     app.register_blueprint(auth_blueprint.app)
+    auth_blueprint.init_blueprint(app)
+
     app.register_blueprint(workout_blueprint.app)
 
-    # Init DB
-    db.init_app(app)
-
     # Attach config file with secret
-    app.config.from_pyfile('config/app.cfg', silent=True)
+    app.config.from_pyfile("config/app.cfg", silent=True)
+
+    # Init DB
+    db.init_db(app)
+    user.init_model(app)
 
     return app
 
