@@ -26,3 +26,4 @@ To have flask refresh on changes, run flask in dev mode. To do that, set env var
  email: admin@admin.com
  password: admin
  ```
+ ### Or create and add new user to the system and try to login
