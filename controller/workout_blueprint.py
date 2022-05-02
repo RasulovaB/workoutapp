@@ -1,9 +1,7 @@
 import json
 from typing import List
-
 from flask import Blueprint, render_template, request, jsonify, flash
-
-# from controller.auth_blueprint import login_required
+from flask_login import login_required
 from model.exercise import Exercise
 
 app = Blueprint('workout', __name__)
@@ -12,13 +10,13 @@ selected_exercises: List[Exercise] = []
 
 
 @app.route("/workout_builder")
-# @login_required
+@login_required
 def workout_builder():
     return render_template("workout-builder.html", title="HIIT Workout Builder")
 
 
 @app.route("/workout_overview")
-# @login_required
+@login_required
 def workout_overview():
     # Call Db and get exercises for the user
 
@@ -47,20 +45,20 @@ def workout_overview():
 
 
 @app.route("/workout_completed")
-# @login_required
+@login_required
 def workout_completed():
     return render_template("workout-completed.html", title="HIIT Workout Completed")
 
 
 @app.route('/get_exercises', methods=['GET'])
-# @login_required
+@login_required
 def get_exercises():
     response = jsonify(selected_exercises)
     return response
 
 
 @app.route('/add_exercise', methods=['POST'])
-# @login_required
+@login_required
 def add_exercise():
     # Create id for the exercise added
     exercise_id = len(selected_exercises)
@@ -86,7 +84,7 @@ def add_exercise():
 
 
 @app.route('/delete_exercises', methods=['DELETE'])
-# @login_required
+@login_required
 def delete_exercises():
     exercise_to_remove = Exercise(**json.loads(request.data))
 
@@ -97,7 +95,7 @@ def delete_exercises():
 
 
 @app.route('/mark_exercise_completed', methods=['POST'])
-# @login_required
+@login_required
 def mark_exercise_completed():
     exercise = Exercise(**json.loads(request.data))
 
@@ -106,7 +104,7 @@ def mark_exercise_completed():
 
 
 @app.route('/get_workout', methods=['GET'])
-# @login_required
+@login_required
 def get_workout():
     data = json.loads(request.data)
 
@@ -115,7 +113,7 @@ def get_workout():
 
 
 @app.route('/submit_workout', methods=['POST'])
-# @login_required
+@login_required
 def submit_exercises():
     data = json.loads(request.data)
 
@@ -129,14 +127,14 @@ def submit_exercises():
 
 
 @app.route('/mark_workout_completed', methods=['POST'])
-# @login_required
+@login_required
 def mark_workout_completed():
     response = jsonify(success=True)
     return response
 
 
 @app.route('/submit_rating', methods=['GET'])
-# @login_required
+@login_required
 def submit_rating():
     response = jsonify(success=True)
     return response
