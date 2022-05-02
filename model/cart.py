@@ -7,7 +7,7 @@ from db.db import db
 class Cart(db.Model):
     exerciseID: int = db.Column(db.Integer, primary_key=True)
     workoutID: int = db.Column(db.Integer, db.ForeignKey('workout.workoutID'))
-    completed: bool = db.Column(db.Boolean, default=False)
+    muscleGroup: str = db.Column(db.String, nullable=False)
 
 
 def init_model(app):

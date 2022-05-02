@@ -20,6 +20,7 @@ def workout_builder():
 @app.route("/workout_overview")
 # @login_required
 def workout_overview():
+    # Call Db and get exercises for the user
 
     # Built workout json hardcoded for now. Need to replace with calculated workout
     exampleJson = {
@@ -62,17 +63,21 @@ def get_exercises():
 # @login_required
 def add_exercise():
     # Create id for the exercise added
-    id = len(selected_exercises)
+    exercise_id = len(selected_exercises)
 
     # Get data from request and find exercise name
     data = json.loads(request.data)
     exercise_name = data['name']
 
     # Logic to fetch exercise
-    exercise_name += '_' + str(id)
+    exercise_name += '_' + str(exercise_id)
 
+# exerciseID: int = db.Column(db.Integer, primary_key=True)
+# exerciseName: str = db.Column(db.String(15), nullable=False)
+# exerciseLink: str = db.Column(db.String(15), nullable=False)
+# muscleGroup: str = db.Column(db.String(15), nullable=False)
     # Create exercise object
-    exercise = Exercise(id=id, name=exercise_name)
+    exercise = Exercise(exerciseID=exercise_id, exerciseName=exercise_name)
     selected_exercises.append(exercise)
 
     # Jsonify a response that will be sent to JS
