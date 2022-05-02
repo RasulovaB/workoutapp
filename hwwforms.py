@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp
-
+from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp, ValidationError
+from model.user import User
 
 class SignupForm(FlaskForm):
     username = StringField(
