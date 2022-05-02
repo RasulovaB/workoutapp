@@ -93,6 +93,6 @@ def register():
         )
         db.session.add(user)
         db.session.commit()
-        flash(f"Account created for {form.username.data}!", "success")
+        flash(f"Welcome to HIITWA {form.username.data}! Please Login.", "success")
         return redirect(url_for("auth.login"))
     return render_template("signup-page.html", title="Register", form=form)
