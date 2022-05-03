@@ -37,9 +37,11 @@ CREATE TABLE workout (
 CREATE TABLE exercise (
     exerciseID int not null,
     workoutID integer not null,
+    muscleGroupID integer not null,
     exerciseName varchar(50) not null,
     exerciseLink varchar(200) not null,
     muscleGroup varchar(20) not null,
+    exerciseDescription varchar(250) not null,
     PRIMARY KEY (exerciseID),
     FOREIGN KEY (workoutID) REFERENCES workout(workoutID)
 );
