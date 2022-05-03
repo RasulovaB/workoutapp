@@ -285,7 +285,7 @@ def init_model(app):
                                                                             "starting ‘A’ position. "
         ))
         db.session.add(Exercise(
-            exerciseID=601, exerciseName='Shoulder Shrugs',
+            exerciseID=602, exerciseName='Shoulder Shrugs',
             exerciseLink='https://www.youtube.com/watch?v=ZhiCSdOVJp0',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Stand straight up with shoulders back "
                                                                             "and core muscles tight. Raise your "
