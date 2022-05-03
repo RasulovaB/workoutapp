@@ -14,21 +14,8 @@ Home Page
 <!-- Override content -->
 {% block content%}
 <!-- Header -->
-<head><nav class="navbar navbar-dark bg-nav-home">
-    <div class="container d-flex justify-content-between center-nav-bar">
-    <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="/static/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      HIITWA
-    </a>
-
-       {% if current_user.is_authenticated %}
-            <a class="btn btn-light log-btn" href="{{ url_for('auth.logout') }}">Logout</a>
-       {% else %}
-            <a class="btn btn-light log-btn" href="{{url_for('auth.login')}}">Login</a>
-       {% endif %}
-
-    </div>
-  </nav>
+<head>
+  {% include 'nav_bar.html' %}
 </head>
 
 <body class="home-bg">
