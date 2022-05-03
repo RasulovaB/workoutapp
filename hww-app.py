@@ -10,7 +10,7 @@ from flask import Flask
 
 from controller import main_blueprint, auth_blueprint, workout_blueprint
 from db import db
-from model import user, exercise, workout, cart
+from model import user, exercise, workout, cart_item
 
 
 def create_app():
@@ -35,7 +35,7 @@ def create_app():
     db.init_db(app)
     user.init_model(app)
     exercise.init_model(app)
-    cart.init_model(app)
+    cart_item.init_model(app)
 
     return app
 

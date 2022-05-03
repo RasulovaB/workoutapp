@@ -15,8 +15,8 @@ class User(db.Model, UserMixin):
     exerciseTime: int = db.Column(db.Integer, default=0, nullable=False)
     exerciseSets: int = db.Column(db.Integer, default=0, nullable=False)
     exerciseRest: int = db.Column(db.Integer, default=0, nullable=False)
-    
 
+    workouts = db.relationship('Workout', lazy='dynamic')
 
     def get_id(self):
         return self.userID
