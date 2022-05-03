@@ -8,7 +8,7 @@ from db.db import db
 class Workout(db.Model):
     workoutID: int = db.Column(db.Integer, primary_key=True, nullable=False)
     userID: int = db.Column(db.Integer, db.ForeignKey('user.userID'))
-    difficulty: int = db.Column(db.Integer, nullable=False, default=0)
+    difficulty: str = db.Column(db.Integer, nullable=False, default='Beginner')
     userRating: int = db.Column(db.Integer, nullable=True)
     isCompleted: bool = db.Column(db.Boolean, nullable=False, default=False)
     startDate: date = db.Column(db.Date, nullable=True)

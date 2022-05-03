@@ -11,6 +11,7 @@ from model.exercise import Exercise
 from flask_login import current_user
 
 from model.muscle_groups_type import MuscleGroupType
+from model.user import User
 from model.workout import Workout
 
 from db.db import db
@@ -30,7 +31,7 @@ def workout_builder():
     if user.workouts:
         existing_workout = user.workouts.filter(
             Workout.userID == user.userID,
-            Workout.isCompleted
+            Workout.isCompleted == False
         ).first()
 
         # If workouts exist but none of them are unfinished
@@ -41,34 +42,6 @@ def workout_builder():
         create_workout_in_db(user.userID)
 
     return render_template("workout-builder.html", title="HIIT Workout Builder")
-
-
-def create_workout_in_db(user_id: int) -> Workout:
-    workout = Workout(userID=user_id)
-    db.session.add(workout)
-    db.session.commit()
-    return workout
-
-
-def get_workout_from_db() -> Workout:
-    existing_workout = current_user.workouts.filter(
-        Workout.userID == current_user.userID,
-        Workout.isCompleted == False
-    ).first()
-    return existing_workout
-
-
-def get_selected_exercises_by_type(muscle_group: MuscleGroupType) -> List[CartItem]:
-    exercises = get_workout_from_db().cartItems.filter(CartItem.muscleGroup == muscle_group).all()
-    return exercises
-
-
-def get_available_exercises_by_type(muscle_group: MuscleGroupType, selected_exercise_ids: List) -> List[Exercise]:
-    exercises = Exercise.query.filter(
-        Exercise.muscleGroup == muscle_group,
-        not_(Exercise.exerciseID.in_(selected_exercise_ids))
-    ).all()
-    return exercises
 
 
 @app.route("/workout_overview")
@@ -114,6 +87,14 @@ def get_exercises():
     return response
 
 
+@app.route('/get_skill_level', methods=['GET'])
+@login_required
+def get_skill_level():
+    workout: Workout = get_workout_from_db()
+    response = jsonify({"difficulty": workout.difficulty})
+    return response
+
+
 @app.route('/add_exercise', methods=['POST'])
 @login_required
 def add_exercise():
@@ -122,13 +103,18 @@ def add_exercise():
     muscle_group_name = data['name']
 
     # Make sure no more than 3 exercises of type are created
-    selected_cart_items: List[CartItem] = get_selected_exercises_by_type(muscle_group_name)
-    exercise_ids = [ci.exerciseID for ci in selected_cart_items]
+    selected_cart_items_total: List[CartItem] = get_selected_exercises()
+    selected_cart_items_muscle_group: List[CartItem] = get_selected_exercises_by_type(
+        muscle_group_name)
+    exercise_ids = [ci.exerciseID for ci in selected_cart_items_muscle_group]
 
     available_exercises = get_available_exercises_by_type(muscle_group_name, exercise_ids)
 
+    if get_num_allowed_exercises() <= len(selected_cart_items_total):
+        return jsonify(message="Maximum workouts selected for the difficulty level."), 400
+
     selected_exercise = None
-    if len(selected_cart_items) < 3:
+    if len(selected_cart_items_muscle_group) < 3 and available_exercises:
         selected_exercise = random.choice(available_exercises)
 
         db.session.add(CartItem(
@@ -141,10 +127,26 @@ def add_exercise():
 
         # Jsonify a response that will be sent to JS
         response = jsonify(selected_exercise)
-    else:
+    elif len(selected_cart_items_muscle_group) >= 3:
         return jsonify(message="No more than 3 workouts can be selected per muscle group"), 400
+    else:
+        return jsonify(message="There are no more workouts for this muscle group"), 400
 
     return response
+
+
+@app.route('/set_skill_level', methods=['POST'])
+@login_required
+def set_skill_level():
+    data = json.loads(request.data)
+    skill_level = data['difficulty']
+
+    workout: Workout = get_workout_from_db()
+
+    workout.difficulty = skill_level
+    db.session.commit()
+
+    return jsonify(success=True)
 
 
 @app.route('/delete_exercises', methods=['DELETE'])
@@ -195,3 +197,48 @@ def mark_workout_completed():
 def submit_rating():
     response = jsonify(success=True)
     return response
+
+
+def create_workout_in_db(user_id: int) -> Workout:
+    workout = Workout(userID=user_id)
+    db.session.add(workout)
+    db.session.commit()
+    return workout
+
+
+def get_workout_from_db() -> Workout:
+    existing_workout = current_user.workouts.filter(
+        Workout.userID == current_user.userID,
+        Workout.isCompleted == False
+    ).first()
+    return existing_workout
+
+
+def get_selected_exercises_by_type(muscle_group: MuscleGroupType) -> List[CartItem]:
+    exercises = get_workout_from_db().cartItems.filter(CartItem.muscleGroup == muscle_group).all()
+    return exercises
+
+
+def get_selected_exercises() -> List[CartItem]:
+    exercises = get_workout_from_db().cartItems.all()
+    return exercises
+
+
+def get_available_exercises_by_type(muscle_group: MuscleGroupType, selected_exercise_ids: List) -> \
+        List[Exercise]:
+    exercises = Exercise.query.filter(
+        Exercise.muscleGroup == muscle_group,
+        not_(Exercise.exerciseID.in_(selected_exercise_ids))
+    ).all()
+    return exercises
+
+
+def get_num_allowed_exercises() -> int:
+    workout: Workout = get_workout_from_db()
+
+    if workout.difficulty == 'Beginner':
+        return 3
+    elif workout.difficulty == 'Intermediate':
+        return 6
+    else:
+        return 9

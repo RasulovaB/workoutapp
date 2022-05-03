@@ -5,6 +5,30 @@ if(document.readyState === "loading") {
 }
 
 function ready() {
+    fetch('/get_skill_level')
+        .then(response => {
+            if (response.ok) {
+                response.json().then((data) => {
+                    let skill_level = data['difficulty']
+                    let elements = document.getElementById("difficulty").children
+
+                    for (let i = 0; i < elements.length; i++) {
+                        elements[i].classList.remove("active")
+                        if (elements[i].textContent.includes(skill_level)) {
+                            elements[i].classList.add("active")
+                        }
+                    }
+
+                    console.log('Success:', response);
+                })
+            } else {
+                console.error('Error:', response);
+            }
+
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
     fetch('/get_exercises')
         .then(response => {
@@ -92,9 +116,11 @@ function addToCartClicked(event) {
                     console.log('Success:', response);
                 })
             } else {
-                console.error('Error:', response);
+                response.json().then((data) => {
+                    alertModal(data.message);
+                    console.log('Error:', data.message);
+                })
             }
-
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -176,6 +202,30 @@ function continueButtonClicked() {
                 //alertModal('Error message');
             }
 
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alertModal(error);
+        });
+}
+
+function changeSkill(skillLevel) {
+    //document.getElementById("difficulty").querySelector('.active')?.innerText
+
+    let requestInit = {
+        method: 'POST',
+        body: JSON.stringify({difficulty: skillLevel})
+    }
+
+    fetch('/set_skill_level', requestInit)
+        .then(response => {
+            if (response.ok) {
+                response.json().then(() => {
+                    console.log('Success:', response);
+                })
+            } else {
+                console.error('Error:', response);
+            }
         })
         .catch((error) => {
             console.error('Error:', error);
