@@ -11,7 +11,7 @@ function ready() {
             if (response.ok) {
                 response.json().then((data) => {
                     for(let i = 0; i < data.length; i++){
-                        addMuscleToCart(data[i].id, data[i].name)
+                        addMuscleToCart(data[i].cartItemID, data[i].exerciseName)
                     }
                     console.log('Success:', response);
                 })
@@ -47,8 +47,8 @@ function removeMuscle(event) {
     let button_target = event.target.tagName === 'I' ? event.currentTarget : event.target
 
     let body = {
-        id: parseInt(button_target.id),
-        name: button_target.innerText
+        exerciseID: parseInt(button_target.id),
+        exerciseName: button_target.innerText
     };
 
     let requestInit = {

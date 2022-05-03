@@ -1,8 +1,19 @@
 import json
+import random
 from typing import List
 from flask import Blueprint, render_template, request, jsonify, flash
 from flask_login import login_required
+from sqlalchemy import not_
+from sqlalchemy.orm.collections import InstrumentedList
+
+from model.cart_item import CartItem
 from model.exercise import Exercise
+from flask_login import current_user
+
+from model.muscle_groups_type import MuscleGroupType
+from model.workout import Workout
+
+from db.db import db
 
 app = Blueprint('workout', __name__)
 
@@ -12,7 +23,52 @@ selected_exercises: List[Exercise] = []
 @app.route("/workout_builder")
 @login_required
 def workout_builder():
+    # Check if user has unfinished workouts
+    user = current_user
+
+    # If user has workouts
+    if user.workouts:
+        existing_workout = user.workouts.filter(
+            Workout.userID == user.userID,
+            Workout.isCompleted
+        ).first()
+
+        # If workouts exist but none of them are unfinished
+        if not existing_workout:
+            create_workout_in_db(user.userID)
+    else:
+        # User does not have workouts. Create one
+        create_workout_in_db(user.userID)
+
     return render_template("workout-builder.html", title="HIIT Workout Builder")
+
+
+def create_workout_in_db(user_id: int) -> Workout:
+    workout = Workout(userID=user_id)
+    db.session.add(workout)
+    db.session.commit()
+    return workout
+
+
+def get_workout_from_db() -> Workout:
+    existing_workout = current_user.workouts.filter(
+        Workout.userID == current_user.userID,
+        Workout.isCompleted == False
+    ).first()
+    return existing_workout
+
+
+def get_selected_exercises_by_type(muscle_group: MuscleGroupType) -> List[CartItem]:
+    exercises = get_workout_from_db().cartItems.filter(CartItem.muscleGroup == muscle_group).all()
+    return exercises
+
+
+def get_available_exercises_by_type(muscle_group: MuscleGroupType, selected_exercise_ids: List) -> List[Exercise]:
+    exercises = Exercise.query.filter(
+        Exercise.muscleGroup == muscle_group,
+        not_(Exercise.exerciseID.in_(selected_exercise_ids))
+    ).all()
+    return exercises
 
 
 @app.route("/workout_overview")
@@ -22,22 +78,22 @@ def workout_overview():
 
     # Built workout json hardcoded for now. Need to replace with calculated workout
     exampleJson = {
-        "exerciseTime":30,
-        "restTime":30,
-        "numSets":4,
-        "exercises":[
-            {"exercise":"Standard Pushup",
-                "description":"Get into a plank position with your arms straight, aligned with chest/nipples and shoulder width apart. Look down at the floor to keep your spine in perfect alignment. While squeezing your glutes and core muscles, lower your chest so that it almost touches the floor, keeping your elbows close to the body. Push yourself back up to the starting position and repeat.",
-                "video":"https://www.youtube.com/embed/IODxDxX7oi4"
-            },
-            {"exercise":"Tricep Dips",
-                "description":"Sitting down on a bench, chair or couch put your palms face down on the edge of the seat just outside your hips. Keeping your feet together, move them outwards from the seat keeping your legs straight until your butt just hangs off the edge. Lower your butt towards the ground until your arms hit a 90-degree angle and then lift yourself back up.",
-                "video":"https://www.youtube.com/embed/0326dy_-CzM"
-            },
-            {"exercise":"Crunches",
-                "description":"Start with your back on the ground, knees together bent towards the ceiling and feet together on the ground. Lift yourself a few inches up off the ground squeezing your core muscles and then back down.",
-                "video":"https://www.youtube.com/embed/Xyd_fa5zoEU"
-            }
+        "exerciseTime": 30,
+        "restTime": 30,
+        "numSets": 4,
+        "exercises": [
+            {"exercise": "Standard Pushup",
+             "description": "Get into a plank position with your arms straight, aligned with chest/nipples and shoulder width apart. Look down at the floor to keep your spine in perfect alignment. While squeezing your glutes and core muscles, lower your chest so that it almost touches the floor, keeping your elbows close to the body. Push yourself back up to the starting position and repeat.",
+             "video": "https://www.youtube.com/embed/IODxDxX7oi4"
+             },
+            {"exercise": "Tricep Dips",
+             "description": "Sitting down on a bench, chair or couch put your palms face down on the edge of the seat just outside your hips. Keeping your feet together, move them outwards from the seat keeping your legs straight until your butt just hangs off the edge. Lower your butt towards the ground until your arms hit a 90-degree angle and then lift yourself back up.",
+             "video": "https://www.youtube.com/embed/0326dy_-CzM"
+             },
+            {"exercise": "Crunches",
+             "description": "Start with your back on the ground, knees together bent towards the ceiling and feet together on the ground. Lift yourself a few inches up off the ground squeezing your core muscles and then back down.",
+             "video": "https://www.youtube.com/embed/Xyd_fa5zoEU"
+             }
         ]
     }
     json_string = json.dumps(exampleJson)
@@ -53,51 +109,52 @@ def workout_completed():
 @app.route('/get_exercises', methods=['GET'])
 @login_required
 def get_exercises():
-    response = jsonify(selected_exercises)
+    exercises: InstrumentedList = get_workout_from_db().cartItems
+    response = jsonify(list(exercises))
     return response
 
 
 @app.route('/add_exercise', methods=['POST'])
 @login_required
 def add_exercise():
-    # Create id for the exercise added
-    exercise_id = len(selected_exercises)
-
     # Get data from request and find exercise name
     data = json.loads(request.data)
-    exercise_name = data['name']
+    muscle_group_name = data['name']
 
-    # Logic to fetch exercise
-    exercise_name += '_' + str(exercise_id)
+    # Make sure no more than 3 exercises of type are created
+    selected_cart_items: List[CartItem] = get_selected_exercises_by_type(muscle_group_name)
+    exercise_ids = [ci.exerciseID for ci in selected_cart_items]
 
-# exerciseID: int = db.Column(db.Integer, primary_key=True)
-# exerciseName: str = db.Column(db.String(15), nullable=False)
-# exerciseLink: str = db.Column(db.String(15), nullable=False)
-# muscleGroup: str = db.Column(db.String(15), nullable=False)
-    # Create exercise object
-    exercise = Exercise(exerciseID=exercise_id, exerciseName=exercise_name)
-    selected_exercises.append(exercise)
+    available_exercises = get_available_exercises_by_type(muscle_group_name, exercise_ids)
 
-    # Jsonify a response that will be sent to JS
-    response = jsonify(exercise)
+    selected_exercise = None
+    if len(selected_cart_items) < 3:
+        selected_exercise = random.choice(available_exercises)
+
+        db.session.add(CartItem(
+            exerciseID=selected_exercise.exerciseID,
+            workoutID=get_workout_from_db().workoutID,
+            muscleGroup=muscle_group_name,
+            exerciseName=selected_exercise.exerciseName
+        ))
+        db.session.commit()
+
+        # Jsonify a response that will be sent to JS
+        response = jsonify(selected_exercise)
+    else:
+        return jsonify(message="No more than 3 workouts can be selected per muscle group"), 400
+
     return response
 
 
 @app.route('/delete_exercises', methods=['DELETE'])
 @login_required
 def delete_exercises():
-    exercise_to_remove = Exercise(**json.loads(request.data))
+    exercise_to_remove = CartItem(**json.loads(request.data))
 
-    selected_exercises.remove(exercise_to_remove)
-
-    response = jsonify(success=True)
-    return response
-
-
-@app.route('/mark_exercise_completed', methods=['POST'])
-@login_required
-def mark_exercise_completed():
-    exercise = Exercise(**json.loads(request.data))
+    db_object = CartItem.query.filter(CartItem.exerciseID == exercise_to_remove.exerciseID).one()
+    db.session.delete(db_object)
+    db.session.commit()
 
     response = jsonify(success=True)
     return response
@@ -138,5 +195,3 @@ def mark_workout_completed():
 def submit_rating():
     response = jsonify(success=True)
     return response
-
-
