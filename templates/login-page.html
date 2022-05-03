@@ -55,7 +55,7 @@
 
                     {% if form.password.errors %}
                     {{ form.password(placeholder='Password', class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback login-invalid-pw">
                         {% for error in form.password.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}

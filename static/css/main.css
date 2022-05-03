@@ -53,13 +53,6 @@ h5{
     font-weight: bold;
 }
 
-.wkbuilder-btn {
-    background-color: red;
-    border-radius: 25px;
-    width: 120px;
-    font-weight: bold;
-}
-
 .home-intro {
     text-align: left;
     position: fixed;
@@ -110,6 +103,10 @@ footer {
 
 .logingrp {
     width: 75%;
+}
+
+.login-invalid-pw {
+    margin-bottom: 2rem;
 }
 
 .btn-grdnt-login {
@@ -170,6 +167,8 @@ footer {
 
 }
 
+/*Workout Pages*/
+
 .toggle-btn {
     border-radius: 25px !important;
     font-weight: bold !important;
@@ -224,11 +223,6 @@ input {
     background-color: rgb(240, 240, 240) !important;
     text-align: start;
     vertical-align: middle;
-}
-
-.row-flex {
-    display: flex;
-    align-items: center;
 }
   
 .center {
