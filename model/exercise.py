@@ -305,29 +305,4 @@ def init_model(app):
                                                                             "toward the wall. Slowly crawl back down "
                                                                             "into a push-up position. "
         ))
-        db.session.add(Exercise(
-            exerciseID=2, exerciseName='crunches2', exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
-            muscleGroup='Abs'
-        ))
-        db.session.add(Exercise(
-            exerciseID=3, exerciseName='crunches3', exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
-            muscleGroup='Abs'
-        ))
-
-        db.session.add(Exercise(
-            exerciseID=4, exerciseName='B21', exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
-            muscleGroup='Back'
-        ))
-        db.session.add(Exercise(
-            exerciseID=5, exerciseName='B1', exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
-            muscleGroup='Back'
-        ))
-        db.session.add(Exercise(
-            exerciseID=6, exerciseName='B3', exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
-            muscleGroup='Back'
-        ))
-        db.session.add(Exercise(
-            exerciseID=7, exerciseName='A1', exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
-            muscleGroup='Arms'
-        ))
         db.session.commit()
