@@ -180,8 +180,25 @@ def submit_exercises():
         return "Unspecified skill level", 400
     else:
         difficulty = data['difficulty']
-        response = jsonify(success=True)
 
+        min_cart_items = 1
+        max_cart_items = get_num_allowed_exercises(difficulty)
+        if difficulty != 'Beginner':
+            if difficulty == 'Intermediate':
+                min_cart_items = get_num_allowed_exercises('Beginner')
+            else:
+                min_cart_items = get_num_allowed_exercises('Intermediate')
+
+        num_items_in_cart = len(get_selected_exercises())
+
+        if num_items_in_cart > max_cart_items:
+            return jsonify(message=f"Too many workouts selected for the given skill level. "
+                                   f"{difficulty} level can only have {max_cart_items} exercises selected"), 400
+        elif num_items_in_cart < min_cart_items:
+            return jsonify(message=f"Not enough workouts selected. "
+                                   f"{difficulty} level must have at least {min_cart_items} exercises selected"), 400
+
+        response = jsonify(success=True)
     return response
 
 
@@ -233,12 +250,15 @@ def get_available_exercises_by_type(muscle_group: MuscleGroupType, selected_exer
     return exercises
 
 
-def get_num_allowed_exercises() -> int:
-    workout: Workout = get_workout_from_db()
+def get_num_allowed_exercises(level: str = None) -> int:
 
-    if workout.difficulty == 'Beginner':
+    if not level:
+        workout: Workout = get_workout_from_db()
+        level = workout.difficulty
+
+    if level == 'Beginner':
         return 3
-    elif workout.difficulty == 'Intermediate':
+    elif level == 'Intermediate':
         return 6
     else:
         return 9

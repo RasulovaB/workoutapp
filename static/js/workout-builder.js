@@ -195,7 +195,11 @@ function continueButtonClicked() {
                     window.location.href = "/workout_overview"
                 })
             } else {
-                console.error('Error:', response);
+                response.json().then((data) => {
+                    alertModal(data.message);
+                    console.log('Error:', response);
+                })
+
 
                 /* Example Call to Modals */
                 //confirmModal('Do you want to continue?', "/workout_overview");
