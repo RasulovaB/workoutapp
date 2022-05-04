@@ -48,26 +48,26 @@ def workout_builder():
 @login_required
 def workout_overview():
     # Call Db and get exercises for the user
+    cart_items: List[CartItem] = get_selected_exercises()
+    cart_items_ids: List[int] = [ci.exerciseID for ci in cart_items]
+    exercises: List[Exercise] = get_available_exercises_from_ids(cart_items_ids)
+
+    user: User = current_user
+
+    modified_cart_items = []
+    for exercise in exercises:
+        modified_cart_items.append({
+            "exercise": exercise.exerciseName,
+            "description": exercise.exerciseDescription,
+            "video": exercise.exerciseLink
+        })
 
     # Built workout json hardcoded for now. Need to replace with calculated workout
     exampleJson = {
-        "exerciseTime": 30,
-        "restTime": 30,
-        "numSets": 4,
-        "exercises": [
-            {"exercise": "Standard Pushup",
-             "description": "Get into a plank position with your arms straight, aligned with chest/nipples and shoulder width apart. Look down at the floor to keep your spine in perfect alignment. While squeezing your glutes and core muscles, lower your chest so that it almost touches the floor, keeping your elbows close to the body. Push yourself back up to the starting position and repeat.",
-             "video": "https://www.youtube.com/embed/IODxDxX7oi4"
-             },
-            {"exercise": "Tricep Dips",
-             "description": "Sitting down on a bench, chair or couch put your palms face down on the edge of the seat just outside your hips. Keeping your feet together, move them outwards from the seat keeping your legs straight until your butt just hangs off the edge. Lower your butt towards the ground until your arms hit a 90-degree angle and then lift yourself back up.",
-             "video": "https://www.youtube.com/embed/0326dy_-CzM"
-             },
-            {"exercise": "Crunches",
-             "description": "Start with your back on the ground, knees together bent towards the ceiling and feet together on the ground. Lift yourself a few inches up off the ground squeezing your core muscles and then back down.",
-             "video": "https://www.youtube.com/embed/Xyd_fa5zoEU"
-             }
-        ]
+        "exerciseTime": user.exerciseTime,
+        "restTime": user.exerciseRest,
+        "numSets": user.exerciseSets,
+        "exercises": modified_cart_items
     }
     json_string = json.dumps(exampleJson)
     return render_template("workout-overview.html", title="HIIT Workout Overview", json=json_string)
@@ -205,6 +205,10 @@ def submit_exercises():
 @app.route('/mark_workout_completed', methods=['POST'])
 @login_required
 def mark_workout_completed():
+    workout: Workout = get_workout_from_db()
+    workout.isCompleted = True
+    db.session.commit()
+
     response = jsonify(success=True)
     return response
 
@@ -250,8 +254,15 @@ def get_available_exercises_by_type(muscle_group: MuscleGroupType, selected_exer
     return exercises
 
 
-def get_num_allowed_exercises(level: str = None) -> int:
+def get_available_exercises_from_ids(selected_exercise_ids: List) -> \
+        List[Exercise]:
+    exercises = Exercise.query.filter(
+        (Exercise.exerciseID.in_(selected_exercise_ids))
+    ).all()
+    return exercises
 
+
+def get_num_allowed_exercises(level: str = None) -> int:
     if not level:
         workout: Workout = get_workout_from_db()
         level = workout.difficulty

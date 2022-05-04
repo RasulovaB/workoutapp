@@ -76,4 +76,26 @@ function getVideo(video, description){
     newRow.appendChild(descriptionRow)
 
     videoContainer.replaceChildren(newRow)
-} 
+}
+
+function complete_workout() {
+    let requestInit = {
+        method: 'POST',
+    }
+
+    fetch('/mark_workout_completed', requestInit)
+        .then(response => {
+            if (response.ok) {
+                response.json().then(() => {
+                    window.location.href= '/workout_completed';
+                    console.log('Success:', response);
+                })
+            } else {
+                console.error('Error:', response);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alertModal(error);
+        });
+}

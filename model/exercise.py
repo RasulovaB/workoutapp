@@ -17,7 +17,7 @@ def init_model(app):
     with app.app_context():
         db.create_all()
         db.session.add(Exercise(
-            exerciseID=101, exerciseName='Pushups', exerciseLink='https://www.youtube.com/watch?v=IODxDxX7oi4',
+            exerciseID=101, exerciseName='Pushups', exerciseLink='https://www.youtube.com/embed/IODxDxX7oi4',
             muscleGroup='Chest', muscleGroupID=100, exerciseDescription="Get into a plank position with your arms "
                                                                         "straight, aligned with chest/nipples and "
                                                                         "shoulder width apart. Look down at the floor "
@@ -29,7 +29,7 @@ def init_model(app):
                                                                         "starting position and repeat. "
         ))
         db.session.add(Exercise(
-            exerciseID=102, exerciseName='Diamond Pushups', exerciseLink='https://www.youtube.com/watch?v=8_ILkbB9an8',
+            exerciseID=102, exerciseName='Diamond Pushups', exerciseLink='https://www.youtube.com/embed/8_ILkbB9an8',
             muscleGroup='Chest', muscleGroupID=100, exerciseDescription="Get into a plank position with your arms "
                                                                         "straight. Move your hands together "
                                                                         "underneath your chest connecting your thumbs "
@@ -44,7 +44,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=103, exerciseName='Plyometric Pushups',
-            exerciseLink='https://www.youtube.com/watch?v=Z1hBVYb3Gi0',
+            exerciseLink='https://www.youtube.com/embed/Z1hBVYb3Gi0',
             muscleGroup='Chest', muscleGroupID=100, exerciseDescription="Get into a plank position with your arms "
                                                                         "straight, aligned with chest/nipples and "
                                                                         "shoulder width apart. Look down at the floor "
@@ -58,7 +58,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=201, exerciseName='Squats',
-            exerciseLink='https://www.youtube.com/watch?v=XNzS1vr4JxE',
+            exerciseLink='https://www.youtube.com/embed/XNzS1vr4JxE',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="Standing with your feet shoulder width apart, "
                                                                        "back straight, head facing forward and core "
                                                                        "muscles tightened, lower your butt to the "
@@ -69,7 +69,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=202, exerciseName='Calf Raises',
-            exerciseLink='https://www.youtube.com/watch?v=-M4-G8p8fmc',
+            exerciseLink='https://www.youtube.com/embed/-M4-G8p8fmc',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="Standing with your feet together or just "
                                                                        "slightly apart, back straight, head facing "
                                                                        "forward and core muscles tightened, "
@@ -80,7 +80,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=203, exerciseName='Lunges',
-            exerciseLink='https://www.youtube.com/watch?v=3XDriUn0udo',
+            exerciseLink='https://www.youtube.com/embed/3XDriUn0udo',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="Start in a kneeling position, back straight, "
                                                                        "head facing forward, core muscles tightened, "
                                                                        "with one leg’s knee touching the ground in a "
@@ -95,7 +95,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=204, exerciseName='Step-ups',
-            exerciseLink='https://www.youtube.com/watch?v=WCFCdxzFBa4',
+            exerciseLink='https://www.youtube.com/embed/WCFCdxzFBa4',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="Standing at the bottom of a staircase, keep "
                                                                        "your back straight, head facing forward and "
                                                                        "core muscles tightened. Lift either one of "
@@ -110,7 +110,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=205, exerciseName='Bulgarian Splits Squats',
-            exerciseLink='https://www.youtube.com/watch?v=2C-uNgKwPLE',
+            exerciseLink='https://www.youtube.com/embed/2C-uNgKwPLE',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="Standing up with your back facing a bench or "
                                                                        "staircase, keep your back straight, head "
                                                                        "facing forward and core muscles tightened. "
@@ -126,7 +126,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=206, exerciseName='Jump Squats',
-            exerciseLink='https://www.youtube.com/watch?v=SDJIQq-BrCc',
+            exerciseLink='https://www.youtube.com/embed/SDJIQq-BrCc',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="Standing with your feet shoulder width apart, "
                                                                        "back straight, head facing forward and core "
                                                                        "muscles tightened, lower your butt to the "
@@ -138,20 +138,20 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=207, exerciseName='High Knees',
-            exerciseLink='https://www.youtube.com/watch?v=D0GwAezTvtg',
+            exerciseLink='https://www.youtube.com/embed/D0GwAezTvtg',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="While running in place, alternate lifting your "
                                                                        "knees up to waist height and then back down."
         ))
         db.session.add(Exercise(
             exerciseID=208, exerciseName='Butt Kicks',
-            exerciseLink='https://www.youtube.com/watch?v=vXVPvY1UbJI',
+            exerciseLink='https://www.youtube.com/embed/vXVPvY1UbJI',
             muscleGroup='Legs', muscleGroupID=200, exerciseDescription="While running in place, alternate lifting your "
                                                                        "heels up until they hit your butt and then "
                                                                        "back down."
         ))
         db.session.add(Exercise(
             exerciseID=301, exerciseName='Superman',
-            exerciseLink='https://www.youtube.com/watch?v=cc6UVRS7PW4',
+            exerciseLink='https://www.youtube.com/embed/cc6UVRS7PW4',
             muscleGroup='Back', muscleGroupID=300, exerciseDescription="Lay down on your stomach with your arms "
                                                                        "straight out above your head to an “I” "
                                                                        "position. Keeping both your elbows and knees "
@@ -162,7 +162,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=302, exerciseName='Aquaman',
-            exerciseLink='https://www.youtube.com/watch?v=arK_BGQjwWY',
+            exerciseLink='https://www.youtube.com/embed/arK_BGQjwWY',
             muscleGroup='Back', muscleGroupID=300, exerciseDescription="Lay down on your stomach with your arms "
                                                                        "straight out above your head to an “I” "
                                                                        "position. Keeping both your elbows and knees "
@@ -175,7 +175,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=303, exerciseName='Prone Kneeling Leg Extension',
-            exerciseLink='https://www.youtube.com/watch?v=kGyjr8goY3Q',
+            exerciseLink='https://www.youtube.com/embed/kGyjr8goY3Q',
             muscleGroup='Back', muscleGroupID=300, exerciseDescription="Get down on all fours with your arms straight "
                                                                        "and underneath your shoulders, knees should be "
                                                                        "touching the ground and make a 90-degree angle "
@@ -189,7 +189,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=401, exerciseName='Tricep Dips',
-            exerciseLink='https://www.youtube.com/watch?v=0326dy_-CzM',
+            exerciseLink='https://www.youtube.com/embed/0326dy_-CzM',
             muscleGroup='Arms', muscleGroupID=400, exerciseDescription="Sitting down on a bench, chair or couch put "
                                                                        "your palms face down on the edge of the seat "
                                                                        "just outside your hips. Keeping your feet "
@@ -201,7 +201,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=402, exerciseName='Arm Circles',
-            exerciseLink='https://www.youtube.com/watch?v=bP52FXTlzjA',
+            exerciseLink='https://www.youtube.com/embed/bP52FXTlzjA',
             muscleGroup='Arms', muscleGroupID=400, exerciseDescription="Stand straight up, shoulders back and core "
                                                                        "muscles tightened. Extend both arms out from "
                                                                        "your body to a “T” pose. Rotate your arms "
@@ -210,7 +210,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=403, exerciseName='Extended Arm Side Plank',
-            exerciseLink='https://www.youtube.com/watch?v=ZudZjUqENyg',
+            exerciseLink='https://www.youtube.com/embed/ZudZjUqENyg',
             muscleGroup='Arms', muscleGroupID=400, exerciseDescription="Starting in a pushup plank position and arms "
                                                                        "straight, turn your body to either side until "
                                                                        "you are perpendicular with the floor, lifting "
@@ -222,7 +222,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=404, exerciseName='Inchworm',
-            exerciseLink='https://www.youtube.com/watch?v=t6EjIe4A-oI',
+            exerciseLink='https://www.youtube.com/embed/t6EjIe4A-oI',
             muscleGroup='Arms', muscleGroupID=400, exerciseDescription="Get into a pushup position. Lift your hips "
                                                                        "into the air and slowly inch your feet towards "
                                                                        "your hands. Make sure you don’t bend your "
@@ -233,7 +233,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=501, exerciseName='Forearm Plank',
-            exerciseLink='https://www.youtube.com/watch?v=kL_NJAkCQBg',
+            exerciseLink='https://www.youtube.com/embed/kL_NJAkCQBg',
             muscleGroup='Abs', muscleGroupID=500, exerciseDescription="Get into a pushup position and place forearms "
                                                                       "on the floor with elbows aligned below "
                                                                       "shoulders and arms parallel to your body at "
@@ -243,7 +243,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=502, exerciseName='Sit-Ups',
-            exerciseLink='https://www.youtube.com/watch?v=1fbU_MkV7NE',
+            exerciseLink='https://www.youtube.com/embed/1fbU_MkV7NE',
             muscleGroup='Abs', muscleGroupID=500, exerciseDescription="Start with your back on the ground, knees about "
                                                                       "a fists width apart bent towards the ceiling "
                                                                       "and feet on the ground. Lift yourself up "
@@ -253,7 +253,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=503, exerciseName='Crunches',
-            exerciseLink='https://www.youtube.com/watch?v=Xyd_fa5zoEU',
+            exerciseLink='https://www.youtube.com/embed/Xyd_fa5zoEU',
             muscleGroup='Abs', muscleGroupID=500, exerciseDescription="Start with your back on the ground, knees "
                                                                       "together bent towards the ceiling and feet "
                                                                       "together on the ground. Lift yourself a few "
@@ -262,7 +262,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=504, exerciseName='Mountain Climbers',
-            exerciseLink='https://www.youtube.com/watch?v=ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
             muscleGroup='Abs', muscleGroupID=500, exerciseDescription="Get into a pushup plank position. Starting "
                                                                       "with either leg, bring your knee to your chest "
                                                                       "and then back to the starting position. Switch "
@@ -272,7 +272,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=601, exerciseName='Pike Pushups',
-            exerciseLink='https://www.youtube.com/watch?v=ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Get into a standard push up position. "
                                                                             "Walk your feet towards your hands while "
                                                                             "lifting your butt into the air until you "
@@ -286,7 +286,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=602, exerciseName='Shoulder Shrugs',
-            exerciseLink='https://www.youtube.com/watch?v=ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Stand straight up with shoulders back "
                                                                             "and core muscles tight. Raise your "
                                                                             "shoulders up, squeeze and hold for 2 "
@@ -295,7 +295,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=603, exerciseName='Wall Walk',
-            exerciseLink='https://www.youtube.com/watch?v=ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Start in a push-up position with your "
                                                                             "feet toward a wall. Slowly back up, "
                                                                             "placing feet higher and higher on the "

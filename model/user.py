@@ -12,9 +12,9 @@ class User(db.Model, UserMixin):
     username: str = db.Column(db.String(25), unique=True, nullable=False)
     email: str = db.Column(db.String(50), unique=True, nullable=False)
     password: str = db.Column(db.String(25), nullable=False)
-    exerciseTime: int = db.Column(db.Integer, default=0, nullable=False)
-    exerciseSets: int = db.Column(db.Integer, default=0, nullable=False)
-    exerciseRest: int = db.Column(db.Integer, default=0, nullable=False)
+    exerciseTime: int = db.Column(db.Integer, default=30, nullable=False)
+    exerciseSets: int = db.Column(db.Integer, default=3, nullable=False)
+    exerciseRest: int = db.Column(db.Integer, default=60, nullable=False)
 
     workouts = db.relationship('Workout', lazy='dynamic')
 
