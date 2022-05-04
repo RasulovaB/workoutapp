@@ -17,6 +17,8 @@ Home Page
         <script language=javascript type=text/javascript src="static/js/workout-completed.js" async></script>
         <script language=javascript type=text/javascript src="static/js/confetti.js" defer></script>
         {% include 'nav_bar.html' %}
+        {% include 'error-modal.html' %}
+        {% include 'confirmation_modal.html' %}
     </head>
 
     <body class="grdnt_bg">
@@ -40,13 +42,13 @@ Home Page
                                 <div class="container d-flex justify-content-center">
                                     <div id="finished-difficulty" class="btn-group btn-group-toggle" data-toggle="buttons">
                                         <label class="btn toggle-btn toggle-btn-width">
-                                        <input type="radio" name="user-difficulty" id="option1" autocomplete="off">Too Easy
+                                        <input type="radio" name="user-difficulty" id="1" autocomplete="off">Too Easy
                                         </label>
                                         <label class="btn toggle-btn toggle-btn-width">
-                                        <input type="radio" name="user-difficulty" id="option2" autocomplete="off">Just Right
+                                        <input type="radio" name="user-difficulty" id="2" autocomplete="off">Just Right
                                         </label>
                                         <label class="btn toggle-btn toggle-btn-width">
-                                        <input type="radio" name="user-difficulty" id="option3" autocomplete="off">Too Hard
+                                        <input type="radio" name="user-difficulty" id="3" autocomplete="off">Too Hard
                                         </label>
                                     </div>
                                 </div>
@@ -55,7 +57,7 @@ Home Page
                             </div>
                         </div>
                         <div class="container align-bottom">
-                            <a href="{{ url_for('main.home') }}" class="btn btn-grdnt-login" role="button">COMPLETE WORKOUT</a>
+                            <a class="btn btn-grdnt-login" role="button" onclick="rate()">COMPLETE WORKOUT</a>
                         </div>
                 </div>   
             </div>

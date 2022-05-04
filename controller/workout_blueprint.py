@@ -213,9 +213,37 @@ def mark_workout_completed():
     return response
 
 
-@app.route('/submit_rating', methods=['GET'])
+@app.route('/submit_rating', methods=['POST'])
 @login_required
 def submit_rating():
+    data = json.loads(request.data)
+    workout_rating = data['workout_rating'] if data else None
+    if workout_rating and workout_rating != '':
+        workout_rating = int(workout_rating)
+    else:
+        return jsonify(message=f"Must select a rating"), 400
+
+    user: User = current_user
+
+    if workout_rating == 1:
+        if 30 <= user.exerciseTime < 60:
+            user.exerciseTime += 15
+        if 3 <= user.exerciseSets < 6:
+            user.exerciseSets += 1
+        if 60 >= user.exerciseRest > 30:
+            user.exerciseRest -= 15
+    elif workout_rating == 2:
+        pass
+    elif workout_rating == 3:
+        if 30 <= user.exerciseTime < 60:
+            user.exerciseTime -= 15
+        if 3 <= user.exerciseSets < 6:
+            user.exerciseSets -= 1
+        if 60 >= user.exerciseRest > 30:
+            user.exerciseRest += 15
+
+    db.session.commit()
+
     response = jsonify(success=True)
     return response
 
@@ -273,3 +301,7 @@ def get_num_allowed_exercises(level: str = None) -> int:
         return 6
     else:
         return 9
+
+
+
+

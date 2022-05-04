@@ -17,6 +17,8 @@ Home Page
 <head>
     <script language=javascript type=text/javascript src="static/js/workout-overview.js" defer></script>
     {% include 'nav_bar.html' %}
+    {% include 'error-modal.html' %}
+    {% include 'confirmation_modal.html' %}
 </head>
 
 <body class="grdnt_bg" onload='getWorkout({{ json|tojson }});'>
