@@ -108,7 +108,7 @@ function addToCartClicked(event) {
         .then(response => {
             if (response.ok) {
                 response.json().then((data) => {
-                    addMuscleToCart(data.cartItemID, data.exerciseName)
+                    addMuscleToCart(data.exerciseID, data.exerciseName)
                     console.log('Success:', response);
                 })
             } else {
