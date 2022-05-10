@@ -262,7 +262,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=504, exerciseName='Mountain Climbers',
-            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/nmwgirgXLYM',
             muscleGroup='Abs', muscleGroupID=500, exerciseDescription="Get into a pushup plank position. Starting "
                                                                       "with either leg, bring your knee to your chest "
                                                                       "and then back to the starting position. Switch "
@@ -272,7 +272,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=601, exerciseName='Pike Pushups',
-            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/sposDXWEB0A',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Get into a standard push up position. "
                                                                             "Walk your feet towards your hands while "
                                                                             "lifting your butt into the air until you "
@@ -286,7 +286,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=602, exerciseName='Shoulder Shrugs',
-            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/6buT-g-zEZg',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Stand straight up with shoulders back "
                                                                             "and core muscles tight. Raise your "
                                                                             "shoulders up, squeeze and hold for 2 "
@@ -295,7 +295,7 @@ def init_model(app):
         ))
         db.session.add(Exercise(
             exerciseID=603, exerciseName='Wall Walk',
-            exerciseLink='https://www.youtube.com/embed/ZhiCSdOVJp0',
+            exerciseLink='https://www.youtube.com/embed/NK_OcHEm8yM',
             muscleGroup='Shoulders', muscleGroupID=600, exerciseDescription="Start in a push-up position with your "
                                                                             "feet toward a wall. Slowly back up, "
                                                                             "placing feet higher and higher on the "
