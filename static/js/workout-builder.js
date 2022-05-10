@@ -35,7 +35,7 @@ function ready() {
             if (response.ok) {
                 response.json().then((data) => {
                     for(let i = 0; i < data.length; i++){
-                        addMuscleToCart(data[i].cartItemID, data[i].exerciseName)
+                        addMuscleToCart(data[i].exerciseID, data[i].exerciseName)
                     }
                     console.log('Success:', response);
                 })
@@ -64,10 +64,6 @@ function ready() {
 }
 
 function removeMuscle(event) {
-    if (event.tagName === 'I') {
-
-    }
-
     let button_target = event.target.tagName === 'I' ? event.currentTarget : event.target
 
     let body = {
@@ -112,7 +108,7 @@ function addToCartClicked(event) {
         .then(response => {
             if (response.ok) {
                 response.json().then((data) => {
-                    addMuscleToCart(data.exerciseID, data.exerciseName)
+                    addMuscleToCart(data.cartItemID, data.exerciseName)
                     console.log('Success:', response);
                 })
             } else {

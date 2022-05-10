@@ -153,8 +153,13 @@ def set_skill_level():
 @login_required
 def delete_exercises():
     exercise_to_remove = CartItem(**json.loads(request.data))
+    workout_id = get_workout_from_db().workoutID
 
-    db_object = CartItem.query.filter(CartItem.exerciseID == exercise_to_remove.exerciseID).one()
+    db_object = CartItem.query.filter(
+        CartItem.workoutID == workout_id,
+        CartItem.exerciseID == exercise_to_remove.exerciseID
+    ).one()
+
     db.session.delete(db_object)
     db.session.commit()
 
@@ -226,20 +231,20 @@ def submit_rating():
     user: User = current_user
 
     if workout_rating == 1:
-        if 30 <= user.exerciseTime < 60:
+        if user.exerciseTime < 60:
             user.exerciseTime += 15
-        if 3 <= user.exerciseSets < 6:
+        if user.exerciseSets < 6:
             user.exerciseSets += 1
-        if 60 >= user.exerciseRest > 30:
+        if user.exerciseRest > 30:
             user.exerciseRest -= 15
     elif workout_rating == 2:
         pass
     elif workout_rating == 3:
-        if 30 <= user.exerciseTime < 60:
+        if 30 < user.exerciseTime:
             user.exerciseTime -= 15
-        if 3 <= user.exerciseSets < 6:
+        if 3 < user.exerciseSets:
             user.exerciseSets -= 1
-        if 60 >= user.exerciseRest > 30:
+        if user.exerciseRest < 60:
             user.exerciseRest += 15
 
     db.session.commit()
