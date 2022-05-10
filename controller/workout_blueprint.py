@@ -1,20 +1,19 @@
 import json
 import random
 from typing import List
-from flask import Blueprint, render_template, request, jsonify, flash
+
+from flask import Blueprint, render_template, request, jsonify
+from flask_login import current_user
 from flask_login import login_required
 from sqlalchemy import not_
 from sqlalchemy.orm.collections import InstrumentedList
 
+from db.db import db
 from model.cart_item import CartItem
 from model.exercise import Exercise
-from flask_login import current_user
-
 from model.muscle_groups_type import MuscleGroupType
 from model.user import User
 from model.workout import Workout
-
-from db.db import db
 
 app = Blueprint('workout', __name__)
 
@@ -233,19 +232,31 @@ def submit_rating():
     if workout_rating == 1:
         if user.exerciseTime < 60:
             user.exerciseTime += 15
+        if user.exerciseTime == 60:
+            pass
         if user.exerciseSets < 6:
             user.exerciseSets += 1
+        if user.exerciseSets == 6:
+            pass
         if user.exerciseRest > 30:
             user.exerciseRest -= 15
+        if user.exerciseRest == 30:
+            pass
     elif workout_rating == 2:
         pass
     elif workout_rating == 3:
         if 30 < user.exerciseTime:
             user.exerciseTime -= 15
+        if user.exerciseTime == 30:
+            pass
         if 3 < user.exerciseSets:
             user.exerciseSets -= 1
+        if user.exerciseSets == 3:
+            pass
         if user.exerciseRest < 60:
             user.exerciseRest += 15
+        if user.exerciseRest == 60:
+            pass
 
     db.session.commit()
 
@@ -306,7 +317,3 @@ def get_num_allowed_exercises(level: str = None) -> int:
         return 6
     else:
         return 9
-
-
-
-
