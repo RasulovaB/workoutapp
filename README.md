@@ -4,7 +4,7 @@
 
 1. Make sure you have python3 installed in your machine
 2. Clone this repository 
-3. Run command `FLASK_ENV=development FLASK_APP=hww-app.py python3 -m flask run`
+3. Run command `FLASK_ENV=development FLASK_APP=hww_app.py python3 -m flask run`
 
 Alternatively, you can access the app using this link: https://hiitwwa.azurewebsites.net.
 If you do, make sure to use Google Chrome (our testing browser) and please clear your browser cache.
