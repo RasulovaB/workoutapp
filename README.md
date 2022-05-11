@@ -6,6 +6,8 @@
 2. Clone this repository 
 3. Run command `FLASK_ENV=development FLASK_APP=hww-app.py python3 -m flask run`
 
+Alternatively, you can access the app using this link: https://hiitwwa.azurewebsites.net.
+If you do, make sure to use Google Chrome (our testing browser) and please clear your browser cache.
 
 ## Dev mode
 To have flask refresh on changes, run flask in dev mode. To do that, set env variable:
